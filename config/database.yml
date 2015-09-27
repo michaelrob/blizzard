@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: blizzard_development
+  username: blizzard_website
+  password: 123healthy
+
+staging:
+  <<: *default
+  database: blizzard_stage
+
+test:
+  <<: *default
+  database: blizzard_testing
+
+production:
+  <<: *default
+  database: blizzard_prod
