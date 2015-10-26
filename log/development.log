@@ -885,3 +885,184 @@ Processing by V1::StoriesController#create as JSON
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "stories" ("title", "body", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Test Title"], ["body", "blah blah blah blah blah blah blah"], ["user_id", 3], ["created_at", "2015-08-30 03:46:44.510444"], ["updated_at", "2015-08-30 03:46:44.510444"]]
   [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
 Completed 200 OK in 60ms (Views: 2.7ms | ActiveRecord: 3.9ms)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2015-09-28 21:23:18 +1000
+  [1m[36mActiveRecord::SchemaMigration Load (13.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mUser Exists (7.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+Completed 422 Unprocessable Entity in 329ms (Views: 0.2ms | ActiveRecord: 35.6ms)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2015-09-28 21:23:21 +1000
+Processing by V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+Completed 422 Unprocessable Entity in 65ms (Views: 0.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2015-09-28 21:23:30 +1000
+Processing by V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+Completed 422 Unprocessable Entity in 63ms (Views: 0.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2015-09-28 21:29:45 +1000
+Processing by V1::UsersController#create as JSON
+  Parameters: {"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@example.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+Completed 422 Unprocessable Entity in 63ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2015-09-28 21:30:51 +1000
+Processing by V1::SessionsController#create as JSON
+  Parameters: {"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "session"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["email", "test@example.com"]]
+Completed 200 OK in 69ms (Views: 1.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/v1/stories" for 127.0.0.1 at 2015-09-28 21:33:07 +1000
+Processing by V1::StoriesController#create as JSON
+  Parameters: {"story"=>{"title"=>"Test Title", "body"=>"blah blah blah blah blah blah blah"}}
+  [1m[36mUser Load (5.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 12]]
+Completed 404 Not Found in 9ms (ActiveRecord: 5.7ms)
+
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=12):
+  app/controllers/application_controller.rb:26:in `authenticate_with_auth_token'
+  app/controllers/application_controller.rb:12:in `authenticate_user_from_token!'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.7ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (37.2ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started POST "/v1/stories" for 127.0.0.1 at 2015-09-28 21:33:11 +1000
+Processing by V1::StoriesController#create as JSON
+  Parameters: {"story"=>{"title"=>"Test Title", "body"=>"blah blah blah blah blah blah blah"}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 12]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
+
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=12):
+  app/controllers/application_controller.rb:26:in `authenticate_with_auth_token'
+  app/controllers/application_controller.rb:12:in `authenticate_user_from_token!'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.7ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (29.7ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started POST "/v1/stories" for 127.0.0.1 at 2015-09-28 21:35:06 +1000
+Processing by V1::StoriesController#create as JSON
+  Parameters: {"story"=>{"title"=>"Test Title", "body"=>"blah blah blah blah blah blah blah"}}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (22.1ms)[0m  [1mINSERT INTO "stories" ("title", "body", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Test Title"], ["body", "blah blah blah blah blah blah blah"], ["user_id", 2], ["created_at", "2015-09-28 11:35:06.084647"], ["updated_at", "2015-09-28 11:35:06.084647"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Completed 200 OK in 40ms (Views: 1.0ms | ActiveRecord: 23.7ms)
+
+
+Started POST "/v1/stories" for 127.0.0.1 at 2015-09-28 21:35:11 +1000
+Processing by V1::StoriesController#create as JSON
+  Parameters: {"story"=>{"title"=>"Test Title", "body"=>"blah blah blah blah blah blah blah"}}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "stories" ("title", "body", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Test Title"], ["body", "blah blah blah blah blah blah blah"], ["user_id", 2], ["created_at", "2015-09-28 11:35:11.823130"], ["updated_at", "2015-09-28 11:35:11.823130"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/v1/stories/11" for 127.0.0.1 at 2015-09-28 21:35:41 +1000
+Processing by V1::StoriesController#show as JSON
+  Parameters: {"id"=>"11", "story"=>{}}
+  [1m[36mStory Load (0.2ms)[0m  [1mSELECT  "stories".* FROM "stories" WHERE "stories"."id" = $1 LIMIT 1[0m  [["id", 11]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Story with 'id'=11):
+  app/controllers/v1/stories_controller.rb:13:in `show'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.4ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.4ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started GET "/v1/stories/11" for 127.0.0.1 at 2015-09-28 21:36:00 +1000
+Processing by V1::StoriesController#show as JSON
+  Parameters: {"id"=>"11", "story"=>{}}
+  [1m[35mStory Load (0.2ms)[0m  SELECT  "stories".* FROM "stories" WHERE "stories"."id" = $1 LIMIT 1  [["id", 11]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Story with 'id'=11):
+  app/controllers/v1/stories_controller.rb:13:in `show'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.2ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (28.3ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started GET "/v1/stories/09" for 127.0.0.1 at 2015-09-28 21:36:12 +1000
+Processing by V1::StoriesController#show as JSON
+  Parameters: {"id"=>"09", "story"=>{}}
+  [1m[36mStory Load (0.2ms)[0m  [1mSELECT  "stories".* FROM "stories" WHERE "stories"."id" = $1 LIMIT 1[0m  [["id", 9]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Story with 'id'=09):
+  app/controllers/v1/stories_controller.rb:13:in `show'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.2ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started GET "/v1/stories/08" for 127.0.0.1 at 2015-09-28 21:36:15 +1000
+Processing by V1::StoriesController#show as JSON
+  Parameters: {"id"=>"08", "story"=>{}}
+  [1m[35mStory Load (0.2ms)[0m  SELECT  "stories".* FROM "stories" WHERE "stories"."id" = $1 LIMIT 1  [["id", 8]]
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/v1/stories/01" for 127.0.0.1 at 2015-09-28 21:36:19 +1000
+Processing by V1::StoriesController#show as JSON
+  Parameters: {"id"=>"01", "story"=>{}}
+  [1m[36mStory Load (0.2ms)[0m  [1mSELECT  "stories".* FROM "stories" WHERE "stories"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/v1/stories/" for 127.0.0.1 at 2015-09-28 21:36:33 +1000
+Processing by V1::StoriesController#index as JSON
+  Parameters: {"story"=>{}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+NameError (uninitialized constant V1::StoriesController::StoriesSerializer):
+  app/controllers/v1/stories_controller.rb:9:in `index'
+
+
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.2ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/michaelrobinson/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (30.4ms)
+Cannot render console with content type application/jsonAllowed content types: [#<Mime::Type:0x007fd2812251e0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fd281224ee8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fd28121dcd8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
