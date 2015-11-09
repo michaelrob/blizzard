@@ -2,8 +2,6 @@ module V1
   class StoriesController < ApplicationController
     skip_before_action :authenticate_user_from_token!, only: [:index, :show]
 
-    # GET /v1/stories
-    # Get all the stories
     def index
       @stories = Story.includes(:user).order(created_at: :desc).all
       render json: @stories, each_serializer: StoriesSerializer
@@ -14,8 +12,6 @@ module V1
       render json: @story, serializer: StorySerializer
     end
 
-    # POST /v1/stories
-    # Add a new story
     def create
       @story = Story.new(story_params)
 
@@ -30,6 +26,5 @@ private
     def story_params
       params.require(:story).permit(:title, :body).merge(user: current_user)
     end
-
   end
 end
