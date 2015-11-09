@@ -33,6 +33,6 @@ private
   end
 
   def authentication_error
-    render json: {error: t('unauthorized')}, status: 401
+    render json: {error: t('application_controller.unauthorized')}, status: 401
   end
 end
