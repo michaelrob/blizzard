@@ -24,3 +24,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
 end
+
+group :test do
+  gem 'shoulda' # assertion helper, https://github.com/thoughtbot/shoulda
+  gem 'mocha' # mocks and stubs, https://github.com/freerange/mocha
+end

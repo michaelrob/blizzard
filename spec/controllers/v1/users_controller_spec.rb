@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController do
+RSpec.describe V1::UsersController, type: :controller do
 
   describe '#create' do
     context 'user successful' do
