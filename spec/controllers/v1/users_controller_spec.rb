@@ -15,12 +15,10 @@ RSpec.describe V1::UsersController, type: :controller do
     end
 
     context 'user successful' do
-      before do
-        post :create, params
-      end
-
-      it 'should return successful user json' do
-        expect(response).to have_http_status :success
+      it 'should create new user and return new user information' do
+        expect { post :create, params }.to change { User.count }.by(1)
+        expect(response.header['Content-Type']).to include 'application/json'
+        expect(response.body).to include 'access_token'
       end
     end
 
