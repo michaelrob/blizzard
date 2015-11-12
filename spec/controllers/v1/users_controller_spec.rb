@@ -17,7 +17,6 @@ RSpec.describe V1::UsersController, type: :controller do
     context 'user successful' do
       it 'should create new user and return new user information' do
         expect { post :create, params }.to change { User.count }.by(1)
-        expect(response.header['Content-Type']).to include 'application/json'
         expect(response.body).to include 'access_token'
       end
     end
@@ -31,6 +30,7 @@ RSpec.describe V1::UsersController, type: :controller do
 
       it 'should return user_create_error json' do
         expect(response).to_not have_http_status :success
+        expect(response.body).to include 'translation missing: en.user_create_error'
       end
     end
   end
