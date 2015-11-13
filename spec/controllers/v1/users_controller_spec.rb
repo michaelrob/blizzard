@@ -15,7 +15,7 @@ RSpec.describe V1::UsersController, type: :controller do
     end
 
     context 'user successful' do
-      it 'should create new user and return new user information' do
+      it 'should create new user and return success' do
         expect { post :create, params }.to change { User.count }.by(1)
         expect(response.body).to include 'access_token'
       end
