@@ -1,28 +1,28 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Blizzard is an api backend for the kookaburra project. 
 
-Things you may want to cover:
+API docs to come. 
 
-* Ruby version
+* Rails 4.2.2
+* PostgreSQL
 
-* System dependencies
+-------------------------------
 
-* Configuration
+*Installation*
 
-* Database creation
+* ensure PostgreSQL is installed, and create a user:
 
-* Database initialization
+        psql template1
+        create role blizzard_website with createdb login password '123password'
+        bundle install (install relevant gems)
+        pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start (starts psql)
 
-* How to run the test suite
+* rake db:setup (creates database, sets up schema migrations, etc)
+* rake db:migrate (creates schema)
+* rails s (start server)
+-------------------------------
 
-* Services (job queues, cache servers, search engines, etc.)
+*Contribution*
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :). 
