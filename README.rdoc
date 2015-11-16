@@ -1,8 +1,11 @@
 == README
 
-Blizzard is an api backend for the kookaburra project. 
+Blizzard is an api backend for the Kookaburra project. Kookaburra is an app for collaborating on project work (trello like),
+with the idea of being simple and clean.
+It will be easy enough for non-technical people to use and understand, while being powerful enough for lots
+of other people to use.
 
-API docs to come. 
+API docs to come.
 
 * Rails 4.2.2
 * PostgreSQL
@@ -21,8 +24,10 @@ API docs to come.
 * rake db:setup (creates database, sets up schema migrations, etc)
 * rake db:migrate (creates schema)
 * rails s (start server)
+
 -------------------------------
 
 *Contribution*
 
-Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :). 
+Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :).
+Approved PRs will be merged to the develop branch for testing before being merged to the master branch.
