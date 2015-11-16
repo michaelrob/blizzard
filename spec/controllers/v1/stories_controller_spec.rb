@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::StoriesController, type: :controller do
+  let(:user) { create(:user) }
 
   describe '#create' do
     let(:params) do
@@ -13,7 +14,11 @@ RSpec.describe V1::StoriesController, type: :controller do
     end
 
     context 'story successful' do
-      it 'should create new user and return new user information' do
+      before do
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it 'should create new story and return success' do
         expect { post :create, params }.to change { Story.count }.by(1)
       end
     end
@@ -28,6 +33,16 @@ RSpec.describe V1::StoriesController, type: :controller do
       it 'should return user_create_error json' do
         expect(response).to_not have_http_status :success
         expect(response.body).to include 'translation missing: en.story_create_error'
+      end
+    end
+
+    context 'unauthorized user' do
+      before do
+        post :create, params
+      end
+
+      it 'should return unauthorized error' do
+        expect(response.body).to include 'translation missing: en.application_controller.unauthorized'
       end
     end
   end
