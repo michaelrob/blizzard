@@ -1,8 +1,8 @@
 == README
 
-Blizzard is an api backend for the kookaburra project. 
+Blizzard is an api backend for the kookaburra project.
 
-API docs to come. 
+API docs to come.
 
 * Rails 4.2.2
 * PostgreSQL
@@ -23,6 +23,6 @@ API docs to come.
 * rails s (start server)
 -------------------------------
 
-*Contribution*
+*Contributing*
 
-Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :). 
+Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :).
