@@ -64,12 +64,12 @@ RSpec.describe V1::StoriesController, type: :controller do
   describe '#show' do
     let(:story) { create(:story, user: user) }
 
-    before do
-      get :show, id: story.id
-    end
-
     context 'authorized' do
       let!(:authorization) { request.headers['Authorization'] = user.access_token }
+
+      before do
+        get :show, id: story.id
+      end
 
       it 'should return specific story for user' do
         # not 100% sure on these expects. There must be a better way for us to check this
@@ -80,6 +80,10 @@ RSpec.describe V1::StoriesController, type: :controller do
     end
 
     context 'not authorized' do
+      before do
+        get :show, id: story.id
+      end
+
       it 'should return unauthorized error' do
         expect(response.body).to include 'translation missing: en.application_controller.unauthorized'
       end
