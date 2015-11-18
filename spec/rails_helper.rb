@@ -4,7 +4,6 @@ require 'devise'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'spec_helper'
-require 'support/controller_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
@@ -60,7 +59,4 @@ RSpec.configure do |config|
 
   # devise helpers
   config.include Devise::TestHelpers, type: :controller
-
-  # controller helpters
-  config.include ControllerHelper, :type => :controller
 end
