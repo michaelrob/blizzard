@@ -23,14 +23,14 @@ RSpec.describe V1::StoriesController, type: :controller do
 
     context 'story unsuccessful' do
       let!(:authorization) { request.headers['Authorization'] = user.access_token }
-      
+
       before do
         params[:story][:body] = nil
 
         post :create, params
       end
 
-      it 'should return user_create_error json' do
+      it 'should return story_create_error json' do
         expect(response).to_not have_http_status :success
         expect(response.body).to include 'translation missing: en.story_create_error'
       end
@@ -48,11 +48,37 @@ RSpec.describe V1::StoriesController, type: :controller do
   end
 
   describe '#index' do
+    let!(:authorization) { request.headers['Authorization'] = user.access_token }
 
+    context 'authorized' do
+      it 'should return all stories for user' do
+
+      end
+    end
+
+    context 'not authorized' do
+
+    end
   end
 
   describe '#show' do
+    let(:story) { create(:story, user: user) }
 
+    context 'authorized' do
+      let!(:authorization) { request.headers['Authorization'] = user.access_token }
+
+      it 'should return specific story for user' do
+        get :show, id: story.id
+
+        # not 100% sure on these expects. There must be a better way for us to check this
+        expect(response.body).to include story.id.to_s
+        expect(response.body).to include story.title
+        expect(response.body).to include story.body
+      end
+    end
+
+    context 'not authorized' do
+
+    end
   end
-
 end
