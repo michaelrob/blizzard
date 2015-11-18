@@ -14,9 +14,7 @@ RSpec.describe V1::StoriesController, type: :controller do
     end
 
     context 'story successful' do
-      before do
-        allow(controller).to receive(:current_user).and_return(user)
-      end
+      let!(:authorization) { request.headers['Authorization'] = user.access_token }
 
       it 'should create new story and return success' do
         expect { post :create, params }.to change { Story.count }.by(1)
@@ -24,6 +22,8 @@ RSpec.describe V1::StoriesController, type: :controller do
     end
 
     context 'story unsuccessful' do
+      let!(:authorization) { request.headers['Authorization'] = user.access_token }
+      
       before do
         params[:story][:body] = nil
 
