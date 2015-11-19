@@ -48,16 +48,32 @@ RSpec.describe V1::StoriesController, type: :controller do
   end
 
   describe '#index' do
-    let!(:authorization) { request.headers['Authorization'] = user.access_token }
+    let(:story) { create(:story, user: user) }
+
 
     context 'authorized' do
-      it 'should return all stories for user' do
+      let!(:authorization) { request.headers['Authorization'] = user.access_token }
 
+      before do
+        story
+        get :index
+      end
+
+      it 'should return all stories for user' do
+        expect(response.body).to include story.id.to_s
+        expect(response.body).to include story.title
+        expect(response.body).to include story.body
       end
     end
 
     context 'not authorized' do
+      before do
+        get :index
+      end
 
+      it 'should return unauthorized error' do
+        expect(response.body).to include 'translation missing: en.application_controller.unauthorized'
+      end
     end
   end
 
