@@ -88,7 +88,6 @@ RSpec.describe V1::StoriesController, type: :controller do
       end
 
       it 'should return specific story for user' do
-        # not 100% sure on these expects. There must be a better way for us to check this
         expect(response.body).to include story.id.to_s
         expect(response.body).to include story.title
         expect(response.body).to include story.body
