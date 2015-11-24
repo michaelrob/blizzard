@@ -27,7 +27,7 @@ API docs to come.
 
 -------------------------------
 
-*Contribution*
+*Contributing*
 
 Feel free to contribute a PR of any changes you'd like to include. PRs without specs will be rejected :).
 Approved PRs will be merged to the develop branch for testing before being merged to the master branch.
