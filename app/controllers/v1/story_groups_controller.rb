@@ -5,7 +5,7 @@ module V1
       @story_group = StoryGroup.new(story_params)
 
       if @story_group.save
-        render json: @story, serializer: StoryGroupSerializer
+        render json: @story_group, serializer: StoryGroupSerializer
       else
         render json: { error: t('story_group_create_error') }, status: :unprocessable_entity
       end
