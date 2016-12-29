@@ -26,6 +26,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda' # assertion helper, https://github.com/thoughtbot/shoulda
-  gem 'mocha' # mocks and stubs, https://github.com/freerange/mocha
+  gem 'shoulda'
+  gem 'mocha'
 end
