@@ -13,6 +13,7 @@ module V1
 
     def show
       @story_group = StoryGroup.find(params[:id])
+      render json: @story_group, serializer: StoryGroupSerializer
     end
 
 private
