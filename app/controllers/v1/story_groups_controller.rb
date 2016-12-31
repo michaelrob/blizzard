@@ -2,7 +2,7 @@ module V1
   class StoryGroupsController < ApplicationController
 
     def create
-      @story_group = StoryGroup.new(story_params)
+      @story_group = StoryGroup.new(story_group_params)
 
       if @story_group.save
         render json: @story_group, serializer: StoryGroupSerializer
@@ -11,9 +11,13 @@ module V1
       end
     end
 
+    def show
+      @story_group = StoryGroup.find(params[:id])
+    end
+
 private
-    def story_params
-      params.require(:story).permit(:title, :description)
+    def story_group_params
+      params.require(:story).permit(:title, :description).merge(user: current_user)
     end
   end
 end
