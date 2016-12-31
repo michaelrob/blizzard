@@ -21,6 +21,12 @@ module V1
       end
     end
 
+    def add_to_group
+      @story = Story.find(params[:id])
+
+      # need to fleah this out
+    end
+
 private
     def story_params
       params.require(:story).permit(:title, :body).merge(user: current_user)
