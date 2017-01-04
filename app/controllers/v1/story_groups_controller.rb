@@ -1,6 +1,11 @@
 module V1
   class StoryGroupsController < ApplicationController
 
+    def index
+      @story_groups = StoryGroup.includes(:user).order(created_at: :desc).all
+      render json: @story_groups, each_serializer: StoryGroupSerializer
+    end
+
     def create
       @story_group = StoryGroup.new(story_group_params)
 
