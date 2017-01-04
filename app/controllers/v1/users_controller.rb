@@ -6,19 +6,16 @@ module V1
       @user = User.new user_params
 
       @user.save ? user_save : user_error
+      if @user.save
+        render json: @user, serializer: V1::SessionSerializer, root: nil
+      else
+        render json: { error: t('user_create_error') }, status: :unprocessable_entity
+      end
     end
 
 private
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
-    end
-
-    def user_save
-      render json: @user, serializer: V1::SessionSerializer, root: nil
-    end
-
-    def user_error
-      render json: { error: t('user_create_error') }, status: :unprocessable_entity
     end
   end
 end
