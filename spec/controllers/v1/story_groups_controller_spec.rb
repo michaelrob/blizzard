@@ -3,6 +3,35 @@ require 'rails_helper'
 RSpec.describe V1::StoryGroupsController, type: :controller do
   let(:user) { create(:user) }
 
+  describe '#index' do
+    let(:story_group) { create(:story_group, user: user) }
+    let(:story) { create(:story, user: user, story_group: story_group) }
+
+    context 'authorized' do
+      let!(:authorization) { request.headers['Authorization'] = user.access_token }
+
+      # before do
+      #   story
+      #   get :index
+      # end
+
+      it 'should return all story groups for user' do
+        expect(response.body).to include story_group.id.to_s
+        expect(response.body).to include story_group.title
+      end
+    end
+
+    context 'not authorized' do
+      before do
+        get :index
+      end
+
+      it 'should return unauthorized error' do
+        expect(response.body).to include 'translation missing: en.application_controller.unauthorized'
+      end
+    end
+  end
+
   describe '#create' do
     let(:params) do
       {
@@ -32,5 +61,8 @@ RSpec.describe V1::StoryGroupsController, type: :controller do
         expect(response.body).to include 'translation missing: en.application_controller.unauthorized'
       end
     end
+  end
+
+  describe '#show' do
   end
 end
