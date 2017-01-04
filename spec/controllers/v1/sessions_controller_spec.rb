@@ -9,7 +9,6 @@ RSpec.describe V1::SessionsController, type: :controller do
         {
           user: {
             email: user.email,
-            username: user.username,
             password: user.password,
             password_confirmation: user.password_confirmation
           }
@@ -22,7 +21,6 @@ RSpec.describe V1::SessionsController, type: :controller do
 
       it 'should render user sign in' do
         expect(response.body).to include user.email
-        expect(response.body).to include user.username
         expect(response.body).to include user.access_token
       end
     end
@@ -32,7 +30,6 @@ RSpec.describe V1::SessionsController, type: :controller do
         {
           user: {
             email: user.email,
-            username: user.username,
             password: user.email
           }
         }
@@ -52,7 +49,6 @@ RSpec.describe V1::SessionsController, type: :controller do
         {
           user: {
             email: user.password,
-            username: user.password,
           }
         }
       end

@@ -7,7 +7,6 @@ RSpec.describe V1::UsersController, type: :controller do
       {
         user: {
           email: 'user_one@exaple.com',
-          username: 'user',
           password: 'password',
           password_confirmation: 'password'
         }
