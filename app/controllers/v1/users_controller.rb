@@ -5,7 +5,6 @@ module V1
     def create
       @user = User.new user_params
 
-      @user.save ? user_save : user_error
       if @user.save
         render json: @user, serializer: V1::SessionSerializer, root: nil
       else
