@@ -1,7 +1,8 @@
 # README
 
-* Rails 4.2.2
-* PostgreSQL
+Blizzard is an api for managing tasks. It provides basic methods for storing and
+retrieving stories. Please see the [Inferno](https://github.com/michaelrob/inferno)
+repository for a front end to this api.
 
 -------------------------------
 
@@ -10,7 +11,7 @@
 * ensure PostgreSQL is installed, and create a user:
 
   psql template1
-  create role blizzard_website with createdb login password '123password'
+  create role blizzard_website with createdb login password '123password';
   bundle install (install relevant gems)
   pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start (starts psql)
 
