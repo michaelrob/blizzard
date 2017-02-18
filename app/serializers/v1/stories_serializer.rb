@@ -1,7 +1,7 @@
 module V1
   class StoriesSerializer < ActiveModel::Serializer
 
-    attributes :title, :created_at, :description, :id
+    attributes :title, :created_at, :description, :id, :assigned, :priority, :tags
     has_one :user, serializer: V1::UserSerializer
 
     def description
