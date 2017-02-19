@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221054406) do
+ActiveRecord::Schema.define(version: 20170219110903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(version: 20151221054406) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "story_group_id"
+    t.integer  "assigned_id"
   end
 
+  add_index "stories", ["assigned_id"], name: "index_stories_on_assigned_id", using: :btree
   add_index "stories", ["user_id"], name: "index_stories_on_user_id", using: :btree
 
   create_table "story_boards", force: :cascade do |t|
@@ -63,5 +65,6 @@ ActiveRecord::Schema.define(version: 20151221054406) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "stories", "story_groups"
+  add_foreign_key "stories", "users", column: "assigned_id"
   add_foreign_key "story_groups", "story_boards"
 end
