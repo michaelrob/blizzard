@@ -9,6 +9,8 @@ module V1
     def show
       @story = Story.find(params[:id])
       render json: @story, serializer: StorySerializer
+
+      # need some add something to check permissions for the user
     end
 
     def create
