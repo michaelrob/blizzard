@@ -77,14 +77,3 @@ header: Authorization: 15:bbbyXLZ3o_XpC6MxU_Bt
 ```
 {"story":{"title":"Test Title","body":"This is a body, it is good"","created_at":"2015-08-20T19:43:07.701Z","abstract":"This is a body, it is good"","id":11,"user":{"username":"testuser"}}}
 ```
-
-####stories#index
-*Request:*
-```
-header: Authorization: 15:bbbyXLZ3o_XpC6MxU_Bt
-```
-*Response:*
-```
-{"stories":[{"title":"Test Title","created_at":"2015-08-20T19:43:07.701Z","abstract":"This is a body, it is good","id":11,"user":{"username":"testuser"}},{"title":"Second test story","created_at":"2015-08-20T17:43:14.845Z","abstract":"This is another body it is good","id":1,"user":{"username":"daphnee"}}]}
-
-```
